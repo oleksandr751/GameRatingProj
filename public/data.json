@@ -1,0 +1,31 @@
+{
+    "Accounts": [
+        {
+            "name":{
+                "validation":"\/^[a-z ,.'-]+$\/i",
+                "dataFormat": "First name/ Last name",
+                "dataType": "text"
+            },
+            "name2":{
+                "validation":"\/^[a-z ,.'-]+$\/i",
+                "dataFormat": "First name/ Last name",
+                "dataType": "text"
+            },
+
+            "mail":{
+                "validation":"\/^(([^<>()[\\]\\\\.,;:\\s@\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,4}))$\/,\r\n",
+                "dataFormat": "local-part@domain",
+                "dataType": "email"
+            },
+            "last seen": {
+                "validation":"\/^(0?[1-9]|[12][0-9]|3[01])[\\\/\\-](0?[1-9]|1[012])[\\\/\\-]\\d{4}$\/",
+                "dataFormat": "DD-MM-YYYY",
+                "dataType": "date"
+            }
+               
+        }
+        
+    ]
+   
+    
+}
