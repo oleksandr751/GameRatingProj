@@ -5,7 +5,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Reports from './pages/Reports';
 import Products from './pages/Products';
-import Posts from './components/Posts';
+import PostsPage from './pages/PostsPage';
+import { Games as gamesIcon } from '@material-ui/icons';
+import Games from './pages/Games';
 
 function App() {
  return (
@@ -16,7 +18,8 @@ function App() {
      <Route path='/' exact component={Home} />
      <Route path='/reports' component={Reports} />
      <Route path='/products' component={Products} />
-     <Route path='/posts' component={Posts} />
+     <Route path='/posts' component={PostsPage} />
+     <Route path='/games' component={Games} />
     </Switch>
    </Router>
   </>

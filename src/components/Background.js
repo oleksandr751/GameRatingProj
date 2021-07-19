@@ -1,13 +1,10 @@
 import React from 'react';
-import Posts from '../components/Posts';
-import './Home.css';
+import '../pages/Home.css';
 
-function Home() {
+const Background = () => {
  return (
-  <div className='homePage'>
-   <div className='context'>
-    <h1>Home page</h1>
-   </div>
+  <div>
+   <div className='context'></div>
    <div className='area'>
     <ul className='circles'>
      <li></li>
@@ -24,6 +21,6 @@ function Home() {
    </div>
   </div>
  );
-}
+};
 
-export default Home;
+export default Background;

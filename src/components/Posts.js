@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { AiFillLike, AiFillDislike } from 'react-icons/ai';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, colors } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import { SignalCellularNullOutlined } from '@material-ui/icons';
 import { AiOutlineComment } from 'react-icons/ai';
+import './Posts.css';
+import { color } from '@material-ui/system';
+import { blue, red } from '@material-ui/core/colors';
 const Posts = () => {
  const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +25,6 @@ const Posts = () => {
  const initialState = {
   postName: '',
   postText: '',
-  comments: '',
  };
  const [createPost, setCreatePost] = useState(false);
  //  const [toggleComments, setToggleComments] = useState(false);
@@ -33,45 +35,85 @@ const Posts = () => {
   setCreatePost(!createPost);
  };
  const [values, setValues] = useState(initialState);
-
+ const [newComments, setNewComments] = useState({ 1: '', 2: '' });
+ //  const [colors, setColors] = useState({
+ //   likeColor: '',
+ //   dislikeColor: '',
+ //   commentsColor: 'green',
+ //  });
+ //   const [newComments, setNewComments] = useState([
+ //     { id: 1, text: "123" },
+ //     { id: 2, text: "456" },
+ //   ]);
  const [posts, setPosts] = useState([
   {
+   id: 1,
    postName: 'Greeting for newcomers!',
    postText: 'Hereby I want to warmely greet our newcomers to this website',
    countLikes: 10,
    countDislikes: 3,
    comments: [
-    'Hereby I want to warmely greet our newcomers to this website',
-    'Hereby I want to warmely greet our newcomers to this website',
+    {
+     id: 1,
+     text: 'Hereby I want to warmely greet our newcomers to this website',
+    },
+    {
+     id: 2,
+     text: 'Hereby I want to warmely greet our newcomers to this website',
+    },
    ],
    showComments: false,
+   colors: {
+    likeColor: '',
+    dislikeColor: '',
+    commentsColor: 'green',
+   },
   },
   {
+   id: 2,
    postName: 'Greeting for newcomers!',
    postText: 'Hereby I want to warmely greet our newcomers to this website',
    countLikes: 13,
    countDislikes: 5,
    comments: [
-    'Hereby I want to warmely greet our newcomers to this website',
-    'Hereby I want to warmely greet our newcomers to this website',
+    {
+     id: 1,
+     text: 'Hereby I want to warmely greet our newcomers to this website',
+    },
+    {
+     id: 2,
+     text: 'Hereby I want to warmely greet our newcomers to this website',
+    },
    ],
    showComments: false,
+   colors: {
+    likeColor: '',
+    dislikeColor: '',
+    commentsColor: 'green',
+   },
   },
  ]);
  const handleClick = (e) => {
+  const newId = Math.floor(Math.random() * 10000);
   setPosts([
    ...posts,
    {
+    id: newId,
     postName: values.postName,
     postText: values.postText,
     countLikes: 0,
     countDislikes: 0,
     comments: [],
     showComments: false,
+    colors: {
+     likeColor: '',
+     dislikeColor: '',
+     commentsColor: 'green',
+    },
    },
   ]);
-  console.log(posts);
-  formRef.current.reset();
+  setNewComments({ ...newComments, [newId]: '' });
+  setValues(initialState);
  };
 
  const handleChange = (e) => {
@@ -80,7 +122,16 @@ const Posts = () => {
    [e.target.name]: e.target.value,
   });
  };
- useEffect(() => {}, []);
+
+ const handleChangeComments = (e, id) => {
+  setNewComments({ ...newComments, [id]: e.target.value });
+  // setNewComments(
+  //   newComments.map((el) =>
+  //     el.id === id ? { ...el, text: e.target.value } : el
+  //   )
+  // );
+ };
+
  return (
   <div className='postsContainer'>
    <Button
@@ -99,6 +150,7 @@ const Posts = () => {
       variant='outlined'
       name='postName'
       onChange={handleChange}
+      value={values.postName}
      ></TextField>
      <TextField
       id='outlined-basic1'
@@ -107,6 +159,7 @@ const Posts = () => {
       variant='outlined'
       multiline
       onChange={handleChange}
+      value={values.postText}
      ></TextField>
      <Button variant='contained' color='primary' onClick={handleClick}>
       Post
@@ -127,33 +180,84 @@ const Posts = () => {
    </label> */}
    {posts.map((element, index) =>
     element.postName ? (
-     <div key={Math.floor(Math.random() * 100000)}>
-      <h1 key={Math.floor(Math.random() * 100000)}>{element.postName}</h1>
-      <legend key={Math.floor(Math.random() * 100000)}>
-       {element.postText}
-      </legend>
+     <div key={index} className='allPosts'>
+      <h1>{element.postName}</h1>
+      <legend>{element.postText}</legend>
       <a
        onClick={() => {
-        setPosts([...posts, (element.countLikes = element.countLikes + 1)]);
+        element.colors.likeColor !== 'blue'
+         ? setPosts([
+            ...posts,
+            ((element.countLikes = element.countLikes + 1),
+            (element.colors.likeColor = 'blue')),
+           ])
+         : setPosts([
+            ...posts,
+            ((element.countLikes = element.countLikes - 1),
+            (element.colors.likeColor = '')),
+           ]);
        }}
       >
-       <IconButton aria-label='delete' className={classes.margin}>
-        <AiFillLike></AiFillLike>
-        <p>{element.countLikes}</p>
+       <IconButton
+        aria-label='delete'
+        className={classes.margin}
+        onClick={() => {
+         //  setPosts([...posts, (element.colors.likeColor = 'blue')]);
+         //  setPosts(
+         //   posts.map((item1) =>
+         //    item1.id === element.id
+         //     ? {
+         //        ...item1,
+         //        colors: { ...item1.colors, likeColor: 'red' },
+         //       }
+         //     : item1
+         //   )
+         //  );
+         //  posts.map((item1) =>
+         //   item1.id === element.id
+         //    ? console.log(item1.id, element.id)
+         //    : console.log(item1.id, element.id)
+         //  );
+        }}
+       >
+        <AiFillLike color={element.colors.likeColor}></AiFillLike>
+        <p>
+         {element.countLikes > -1
+          ? element.countLikes
+          : (element.countLikes = 0)}
+        </p>
        </IconButton>
       </a>
 
       <a
        onClick={() => {
-        setPosts([
-         ...posts,
-         (element.countDislikes = element.countDislikes + 1),
-        ]);
+        element.colors.dislikeColor !== 'red'
+         ? setPosts([
+            ...posts,
+            ((element.countDislikes = element.countDislikes + 1),
+            (element.colors.dislikeColor = 'red')),
+           ])
+         : setPosts([
+            ...posts,
+            ((element.countDislikes = element.countDislikes - 1),
+            (element.colors.dislikeColor = '')),
+           ]);
        }}
       >
-       <IconButton aria-label='delete' className={classes.margin}>
-        <AiFillDislike></AiFillDislike>
-        <p>{element.countDislikes}</p>
+       <IconButton
+        aria-label='delete'
+        className={classes.margin}
+        onClick={() => {
+         setPosts([...posts]);
+         //  console.log(posts);
+        }}
+       >
+        <AiFillDislike color={element.colors.dislikeColor}></AiFillDislike>
+        <p>
+         {element.countDislikes > -1
+          ? element.countDislikes
+          : (element.countDislikes = 0)}
+        </p>
        </IconButton>
       </a>
       <div>
@@ -163,25 +267,46 @@ const Posts = () => {
         }}
        >
         <IconButton aria-label='delete' className={classes.margin}>
-         <AiOutlineComment></AiOutlineComment>
+         <AiOutlineComment
+          color={element.colors.commentsColor}
+         ></AiOutlineComment>
          <p>{element.comments.length}</p>
         </IconButton>
        </a>
        {element.showComments ? (
         <div>
          {element.comments.map((comment) => (
-          <p key={Math.floor(Math.random() * 100000)}>{comment}</p>
+          <p>{comment.text}</p>
          ))}
          <TextField
-          key={Math.floor(Math.random() * 100000)}
           name='comments'
-          onChange={handleChange}
+          onChange={(e) => handleChangeComments(e, element.id)}
+          value={newComments[element.id]}
+          // value={
+          //   newComments.find((comm) => comm.id === element.id).text
+          // }
          ></TextField>
+
          <Button
-          key={Math.floor(Math.random() * 100000)}
           onClick={() => {
-           setPosts([...posts, element.comments.push(values.comments)]);
-           console.log(posts);
+           setPosts(
+            posts.map((item) =>
+             item.id === element.id && newComments[element.id]
+              ? {
+                 ...item,
+                 comments: [
+                  ...item.comments,
+                  {
+                   id: element.id,
+                   text: newComments[element.id],
+                  },
+                 ],
+                }
+              : item
+            )
+           );
+           setNewComments({ ...newComments, [element.id]: '' });
+           console.log(newComments);
           }}
          >
           Add Comment
