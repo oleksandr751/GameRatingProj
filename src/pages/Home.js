@@ -8,20 +8,19 @@ function Home() {
    <div className='context'>
     <h1>Home page</h1>
    </div>
-   <div className='area'>
-    <ul className='circles'>
-     <li></li>
-     <li></li>
-     <li></li>
-     <li></li>
-     <li></li>
-     <li></li>
-     <li></li>
-     <li></li>
-     <li></li>
-     <li></li>
-    </ul>
-   </div>
+   <div className='area'></div>
+   <ul className='circles'>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+   </ul>
   </div>
  );
 }

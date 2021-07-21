@@ -10,164 +10,164 @@ import './Posts.css';
 import { color } from '@material-ui/system';
 import { blue, red } from '@material-ui/core/colors';
 const Posts = () => {
- const useStyles = makeStyles((theme) => ({
-  root: {
-   '& > *': {
-    margin: theme.spacing(1),
-   },
-  },
-  input: {
-   display: 'none',
-  },
- }));
- const classes = useStyles();
- const formRef = useRef();
- const initialState = {
-  postName: '',
-  postText: '',
- };
- const [createPost, setCreatePost] = useState(false);
- //  const [toggleComments, setToggleComments] = useState(false);
- //  const toggleCommentsFunc = () => {
- //   setToggleComments(!toggleComments);
- //  };
- const toggleCreatePost = () => {
-  setCreatePost(!createPost);
- };
- const [values, setValues] = useState(initialState);
- const [newComments, setNewComments] = useState({ 1: '', 2: '' });
- //  const [colors, setColors] = useState({
- //   likeColor: '',
- //   dislikeColor: '',
- //   commentsColor: 'green',
- //  });
- //   const [newComments, setNewComments] = useState([
- //     { id: 1, text: "123" },
- //     { id: 2, text: "456" },
- //   ]);
- const [posts, setPosts] = useState([
-  {
-   id: 1,
-   postName: 'Greeting for newcomers!',
-   postText: 'Hereby I want to warmely greet our newcomers to this website',
-   countLikes: 10,
-   countDislikes: 3,
-   comments: [
-    {
-     id: 1,
-     text: 'Hereby I want to warmely greet our newcomers to this website',
+  const useStyles = makeStyles(theme => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+      },
     },
-    {
-     id: 2,
-     text: 'Hereby I want to warmely greet our newcomers to this website',
+    input: {
+      display: 'none',
     },
-   ],
-   showComments: false,
-   colors: {
-    likeColor: '',
-    dislikeColor: '',
-    commentsColor: 'green',
-   },
-  },
-  {
-   id: 2,
-   postName: 'Greeting for newcomers!',
-   postText: 'Hereby I want to warmely greet our newcomers to this website',
-   countLikes: 13,
-   countDislikes: 5,
-   comments: [
+  }));
+  const classes = useStyles();
+  const formRef = useRef();
+  const initialState = {
+    postName: '',
+    postText: '',
+  };
+  const [createPost, setCreatePost] = useState(false);
+  //  const [toggleComments, setToggleComments] = useState(false);
+  //  const toggleCommentsFunc = () => {
+  //   setToggleComments(!toggleComments);
+  //  };
+  const toggleCreatePost = () => {
+    setCreatePost(!createPost);
+  };
+  const [values, setValues] = useState(initialState);
+  const [newComments, setNewComments] = useState({ 1: '', 2: '' });
+  //  const [colors, setColors] = useState({
+  //   likeColor: '',
+  //   dislikeColor: '',
+  //   commentsColor: 'green',
+  //  });
+  //   const [newComments, setNewComments] = useState([
+  //     { id: 1, text: "123" },
+  //     { id: 2, text: "456" },
+  //   ]);
+  const [posts, setPosts] = useState([
     {
-     id: 1,
-     text: 'Hereby I want to warmely greet our newcomers to this website',
+      id: 1,
+      postName: 'Greeting for newcomers!',
+      postText: 'Hereby I want to warmely greet our newcomers to this website',
+      countLikes: 10,
+      countDislikes: 3,
+      comments: [
+        {
+          id: 1,
+          text: 'Hereby I want to warmely greet our newcomers to this website',
+        },
+        {
+          id: 2,
+          text: 'Hereby I want to warmely greet our newcomers to this website',
+        },
+      ],
+      showComments: false,
+      colors: {
+        likeColor: '',
+        dislikeColor: '',
+        commentsColor: 'green',
+      },
     },
     {
-     id: 2,
-     text: 'Hereby I want to warmely greet our newcomers to this website',
+      id: 2,
+      postName: 'Greeting for newcomers!',
+      postText: 'Hereby I want to warmely greet our newcomers to this website',
+      countLikes: 13,
+      countDislikes: 5,
+      comments: [
+        {
+          id: 1,
+          text: 'Hereby I want to warmely greet our newcomers to this website',
+        },
+        {
+          id: 2,
+          text: 'Hereby I want to warmely greet our newcomers to this website',
+        },
+      ],
+      showComments: false,
+      colors: {
+        likeColor: '',
+        dislikeColor: '',
+        commentsColor: 'green',
+      },
     },
-   ],
-   showComments: false,
-   colors: {
-    likeColor: '',
-    dislikeColor: '',
-    commentsColor: 'green',
-   },
-  },
- ]);
- const handleClick = (e) => {
-  const newId = Math.floor(Math.random() * 10000);
-  setPosts([
-   ...posts,
-   {
-    id: newId,
-    postName: values.postName,
-    postText: values.postText,
-    countLikes: 0,
-    countDislikes: 0,
-    comments: [],
-    showComments: false,
-    colors: {
-     likeColor: '',
-     dislikeColor: '',
-     commentsColor: 'green',
-    },
-   },
   ]);
-  setNewComments({ ...newComments, [newId]: '' });
-  setValues(initialState);
- };
+  const handleClick = e => {
+    const newId = Math.floor(Math.random() * 10000);
+    setPosts([
+      ...posts,
+      {
+        id: newId,
+        postName: values.postName,
+        postText: values.postText,
+        countLikes: 0,
+        countDislikes: 0,
+        comments: [],
+        showComments: false,
+        colors: {
+          likeColor: '',
+          dislikeColor: '',
+          commentsColor: 'green',
+        },
+      },
+    ]);
+    setNewComments({ ...newComments, [newId]: '' });
+    setValues(initialState);
+  };
 
- const handleChange = (e) => {
-  setValues({
-   ...values,
-   [e.target.name]: e.target.value,
-  });
- };
+  const handleChange = e => {
+    setValues({
+      ...values,
+      [e.target.name]: e.target.value,
+    });
+  };
 
- const handleChangeComments = (e, id) => {
-  setNewComments({ ...newComments, [id]: e.target.value });
-  // setNewComments(
-  //   newComments.map((el) =>
-  //     el.id === id ? { ...el, text: e.target.value } : el
-  //   )
-  // );
- };
+  const handleChangeComments = (e, id) => {
+    setNewComments({ ...newComments, [id]: e.target.value });
+    // setNewComments(
+    //   newComments.map((el) =>
+    //     el.id === id ? { ...el, text: e.target.value } : el
+    //   )
+    // );
+  };
 
- return (
-  <div className='postsContainer'>
-   <Button
-    id='createPostButton'
-    variant='contained'
-    color='primary'
-    onClick={toggleCreatePost}
-   >
-    Create Post
-   </Button>
-   {createPost ? (
-    <form ref={formRef}>
-     <TextField
-      id='outlined-basic'
-      label='Post Name'
-      variant='outlined'
-      name='postName'
-      onChange={handleChange}
-      value={values.postName}
-     ></TextField>
-     <TextField
-      id='outlined-basic1'
-      name='postText'
-      label='Post Text'
-      variant='outlined'
-      multiline
-      onChange={handleChange}
-      value={values.postText}
-     ></TextField>
-     <Button variant='contained' color='primary' onClick={handleClick}>
-      Post
-     </Button>
-    </form>
-   ) : null}
+  return (
+    <div className="postsContainer">
+      <Button
+        id="createPostButton"
+        variant="contained"
+        color="primary"
+        onClick={toggleCreatePost}
+      >
+        Create Post
+      </Button>
+      {createPost ? (
+        <form ref={formRef}>
+          <TextField
+            id="outlined-basic"
+            label="Post Name"
+            variant="outlined"
+            name="postName"
+            onChange={handleChange}
+            value={values.postName}
+          ></TextField>
+          <TextField
+            id="outlined-basic1"
+            name="postText"
+            label="Post Text"
+            variant="outlined"
+            multiline
+            onChange={handleChange}
+            value={values.postText}
+          ></TextField>
+          <Button variant="contained" color="primary" onClick={handleClick}>
+            Post
+          </Button>
+        </form>
+      ) : null}
 
-   {/* <input
+      {/* <input
     accept='image/*'
     className={classes.input}
     id='icon-button-file'
@@ -178,147 +178,127 @@ const Posts = () => {
      <PhotoCamera />
     </IconButton>
    </label> */}
-   {posts.map((element, index) =>
-    element.postName ? (
-     <div key={index} className='allPosts'>
-      <h1>{element.postName}</h1>
-      <legend>{element.postText}</legend>
-      <a
-       onClick={() => {
-        element.colors.likeColor !== 'blue'
-         ? setPosts([
-            ...posts,
-            ((element.countLikes = element.countLikes + 1),
-            (element.colors.likeColor = 'blue')),
-           ])
-         : setPosts([
-            ...posts,
-            ((element.countLikes = element.countLikes - 1),
-            (element.colors.likeColor = '')),
-           ]);
-       }}
-      >
-       <IconButton
-        aria-label='delete'
-        className={classes.margin}
-        onClick={() => {
-         //  setPosts([...posts, (element.colors.likeColor = 'blue')]);
-         //  setPosts(
-         //   posts.map((item1) =>
-         //    item1.id === element.id
-         //     ? {
-         //        ...item1,
-         //        colors: { ...item1.colors, likeColor: 'red' },
-         //       }
-         //     : item1
-         //   )
-         //  );
-         //  posts.map((item1) =>
-         //   item1.id === element.id
-         //    ? console.log(item1.id, element.id)
-         //    : console.log(item1.id, element.id)
-         //  );
-        }}
-       >
-        <AiFillLike color={element.colors.likeColor}></AiFillLike>
-        <p>
-         {element.countLikes > -1
-          ? element.countLikes
-          : (element.countLikes = 0)}
-        </p>
-       </IconButton>
-      </a>
+      {posts.map((element, index) =>
+        element.postName ? (
+          <div key={index} className="allPosts">
+            <h1>{element.postName}</h1>
+            <legend>{element.postText}</legend>
 
-      <a
-       onClick={() => {
-        element.colors.dislikeColor !== 'red'
-         ? setPosts([
-            ...posts,
-            ((element.countDislikes = element.countDislikes + 1),
-            (element.colors.dislikeColor = 'red')),
-           ])
-         : setPosts([
-            ...posts,
-            ((element.countDislikes = element.countDislikes - 1),
-            (element.colors.dislikeColor = '')),
-           ]);
-       }}
-      >
-       <IconButton
-        aria-label='delete'
-        className={classes.margin}
-        onClick={() => {
-         setPosts([...posts]);
-         //  console.log(posts);
-        }}
-       >
-        <AiFillDislike color={element.colors.dislikeColor}></AiFillDislike>
-        <p>
-         {element.countDislikes > -1
-          ? element.countDislikes
-          : (element.countDislikes = 0)}
-        </p>
-       </IconButton>
-      </a>
-      <div>
-       <a
-        onClick={() => {
-         setPosts([...posts, (element.showComments = !element.showComments)]);
-        }}
-       >
-        <IconButton aria-label='delete' className={classes.margin}>
-         <AiOutlineComment
-          color={element.colors.commentsColor}
-         ></AiOutlineComment>
-         <p>{element.comments.length}</p>
-        </IconButton>
-       </a>
-       {element.showComments ? (
-        <div>
-         {element.comments.map((comment) => (
-          <p>{comment.text}</p>
-         ))}
-         <TextField
-          name='comments'
-          onChange={(e) => handleChangeComments(e, element.id)}
-          value={newComments[element.id]}
-          // value={
-          //   newComments.find((comm) => comm.id === element.id).text
-          // }
-         ></TextField>
+            <IconButton
+              aria-label="delete"
+              className={classes.margin}
+              onClick={() => {
+                element.colors.likeColor !== 'blue'
+                  ? setPosts([
+                      ...posts,
+                      ((element.countLikes = element.countLikes + 1),
+                      (element.colors.likeColor = 'blue')),
+                    ])
+                  : setPosts([
+                      ...posts,
+                      ((element.countLikes = element.countLikes - 1),
+                      (element.colors.likeColor = '')),
+                    ]);
+              }}
+            >
+              <AiFillLike color={element.colors.likeColor}></AiFillLike>
+              <p>
+                {element.countLikes > -1
+                  ? element.countLikes
+                  : (element.countLikes = 0)}
+              </p>
+            </IconButton>
 
-         <Button
-          onClick={() => {
-           setPosts(
-            posts.map((item) =>
-             item.id === element.id && newComments[element.id]
-              ? {
-                 ...item,
-                 comments: [
-                  ...item.comments,
-                  {
-                   id: element.id,
-                   text: newComments[element.id],
-                  },
-                 ],
-                }
-              : item
-            )
-           );
-           setNewComments({ ...newComments, [element.id]: '' });
-           console.log(newComments);
-          }}
-         >
-          Add Comment
-         </Button>
-        </div>
-       ) : null}
-      </div>
-     </div>
-    ) : null
-   )}
-  </div>
- );
+            <IconButton
+              aria-label="delete"
+              className={classes.margin}
+              onClick={() => {
+                element.colors.dislikeColor !== 'red'
+                  ? setPosts([
+                      ...posts,
+                      ((element.countDislikes = element.countDislikes + 1),
+                      (element.colors.dislikeColor = 'red')),
+                    ])
+                  : setPosts([
+                      ...posts,
+                      ((element.countDislikes = element.countDislikes - 1),
+                      (element.colors.dislikeColor = '')),
+                    ]);
+              }}
+            >
+              <AiFillDislike
+                color={element.colors.dislikeColor}
+              ></AiFillDislike>
+              <p>
+                {element.countDislikes > -1
+                  ? element.countDislikes
+                  : (element.countDislikes = 0)}
+              </p>
+            </IconButton>
+
+            <div>
+              <IconButton
+                aria-label="delete"
+                className={classes.margin}
+                onClick={() => {
+                  setPosts([
+                    ...posts,
+                    (element.showComments = !element.showComments),
+                  ]);
+                }}
+              >
+                <AiOutlineComment
+                  color={element.colors.commentsColor}
+                ></AiOutlineComment>
+                <p>{element.comments.length}</p>
+              </IconButton>
+
+              {element.showComments ? (
+                <div>
+                  {element.comments.map(comment => (
+                    <p key={comment.id}>{comment.text}</p>
+                  ))}
+                  <TextField
+                    name="comments"
+                    onChange={e => handleChangeComments(e, element.id)}
+                    value={newComments[element.id]}
+                    // value={
+                    //   newComments.find((comm) => comm.id === element.id).text
+                    // }
+                  ></TextField>
+
+                  <Button
+                    onClick={() => {
+                      setPosts(
+                        posts.map(item =>
+                          item.id === element.id && newComments[element.id]
+                            ? {
+                                ...item,
+                                comments: [
+                                  ...item.comments,
+                                  {
+                                    id: element.id,
+                                    text: newComments[element.id],
+                                  },
+                                ],
+                              }
+                            : item,
+                        ),
+                      );
+                      setNewComments({ ...newComments, [element.id]: '' });
+                      console.log(newComments);
+                    }}
+                  >
+                    Add Comment
+                  </Button>
+                </div>
+              ) : null}
+            </div>
+          </div>
+        ) : null,
+      )}
+    </div>
+  );
 };
 
 export default Posts;
